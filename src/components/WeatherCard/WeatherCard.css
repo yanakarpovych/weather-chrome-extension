@@ -1,0 +1,15 @@
+.weather-card {
+  margin: 12px 0;
+}
+
+.weatherCard-title {
+  font-size: 24px !important;
+}
+
+.weatherCard-temp {
+  font-size: 46px !important;
+}
+
+.weatherCard-body {
+  font-size: 16px !important;
+}
