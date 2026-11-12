@@ -18,12 +18,18 @@ import "./WeatherCard.css";
 interface WeatherCardProps {
   city: string;
   tempScale: OpenWeatherTempScale;
+  deleteLabel?: string;
   onDelete?: () => void;
 }
 
 type WeatherCardState = "loading" | "error" | "ready";
 
-function WeatherCard({ city, tempScale, onDelete }: WeatherCardProps) {
+function WeatherCard({
+  city,
+  tempScale,
+  deleteLabel = "Delete",
+  onDelete,
+}: WeatherCardProps) {
   const [weatherData, setWeatherData] = useState<OpenWeatherData | null>(null);
   const [cardState, setCardState] = useState<WeatherCardState>("loading");
 
@@ -106,7 +112,7 @@ function WeatherCard({ city, tempScale, onDelete }: WeatherCardProps) {
       {onDelete && (
         <CardActions>
           <Button color="secondary" onClick={onDelete}>
-            Delete
+            {deleteLabel}
           </Button>
         </CardActions>
       )}

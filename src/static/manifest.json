@@ -1,6 +1,6 @@
 {
   "name": "Weather Extension",
-  "description": "Weather Extension in React!",
+  "description": "Weather information for your favorite cities",
   "version": "1.0.0",
   "manifest_version": 3,
   "icons": {
@@ -13,16 +13,16 @@
     "default_title": "Weather Extension",
     "default_icon": "icon.png"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "alarms", "contextMenus", "tabs"],
+  "host_permissions": ["https://api.openweathermap.org/*"],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["http://*/*", "https://*/*"],
       "js": ["contentScript.js"]
     }
-  ],
-  "host_permissions": ["https://api.openweathermap.org/*"]
+  ]
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Box, IconButton, InputBase, Paper, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import PictureInPictureIcon from "@mui/icons-material/PictureInPicture";
 import "@fontsource/roboto/400.css";
 
 import WeatherCard from "../components/WeatherCard/WeatherCard";
@@ -12,6 +13,7 @@ import {
   setStoredOptions,
   type LocalStorageOptions,
 } from "../utils/storage";
+import { Messages } from "../utils/messages";
 
 import "./popup.css";
 
@@ -32,14 +34,15 @@ function App() {
 
         setCities(storedCities);
         setOptions(storedOptions);
-      } catch {
+      } catch (error) {
+        console.error("Failed to load stored data:", error);
         setError("Failed to load saved settings.");
       } finally {
         setIsLoading(false);
       }
     }
 
-    loadStoredData();
+    void loadStoredData();
   }, []);
 
   async function handleAddCity() {
@@ -62,7 +65,8 @@ function App() {
       setCities(updatedCities);
       setCityInput("");
       setError("");
-    } catch {
+    } catch (error) {
+      console.error("Failed to save city:", error);
       setError("Failed to save city.");
     }
   }
@@ -74,7 +78,8 @@ function App() {
       await setStoredCities(updatedCities);
       setCities(updatedCities);
       setError("");
-    } catch {
+    } catch (error) {
+      console.error("Failed to delete city:", error);
       setError("Failed to delete city.");
     }
   }
@@ -91,8 +96,33 @@ function App() {
       await setStoredOptions(updatedOptions);
       setOptions(updatedOptions);
       setError("");
-    } catch {
+    } catch (error) {
+      console.error("Failed to save temperature scale:", error);
       setError("Failed to save temperature scale.");
+    }
+  }
+
+  async function handleOverlayToggle() {
+    try {
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+
+      if (!tab?.id) {
+        setError("No active tab found.");
+        return;
+      }
+
+      await chrome.tabs.sendMessage(tab.id, Messages.TOGGLE_OVERLAY);
+
+      setError("");
+    } catch (error) {
+      console.error("Failed to toggle overlay:", error);
+
+      setError(
+        "Overlay is unavailable on this page. Try reloading a regular website.",
+      );
     }
   }
 
@@ -156,6 +186,16 @@ function App() {
             sx={{ width: 48, height: 48 }}
           >
             {options.tempScale === "metric" ? "°C" : "°F"}
+          </IconButton>
+        </Paper>
+
+        <Paper>
+          <IconButton
+            onClick={() => void handleOverlayToggle()}
+            aria-label="Toggle weather overlay"
+            sx={{ width: 48, height: 48 }}
+          >
+            <PictureInPictureIcon />
           </IconButton>
         </Paper>
       </Box>

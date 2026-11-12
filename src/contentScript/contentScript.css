@@ -1,0 +1,13 @@
+.weather-extension-overlay {
+  position: fixed;
+  top: 15%;
+  left: 5%;
+  width: 280px;
+  max-width: 90vw;
+  z-index: 2147483647;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+.weather-extension-overlay .weather-card {
+  margin: 0;
+}
