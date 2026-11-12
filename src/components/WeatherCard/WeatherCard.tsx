@@ -18,7 +18,7 @@ import "./WeatherCard.css";
 interface WeatherCardProps {
   city: string;
   tempScale: OpenWeatherTempScale;
-  onDelete: () => void;
+  onDelete?: () => void;
 }
 
 type WeatherCardState = "loading" | "error" | "ready";
@@ -103,11 +103,13 @@ function WeatherCard({ city, tempScale, onDelete }: WeatherCardProps) {
         )}
       </CardContent>
 
-      <CardActions>
-        <Button color="secondary" onClick={onDelete}>
-          Delete
-        </Button>
-      </CardActions>
+      {onDelete && (
+        <CardActions>
+          <Button color="secondary" onClick={onDelete}>
+            Delete
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 }
