@@ -1,9 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   width: 460px;
   min-height: 400px;
   max-height: 600px;
   margin: 0;
   overflow-y: auto;
-  background-color: #f5f5f5;
+  background: #f5f7fb;
   font-family: "Roboto", Arial, sans-serif;
+}
+
+#weather-extension-root {
+  width: 100%;
 }

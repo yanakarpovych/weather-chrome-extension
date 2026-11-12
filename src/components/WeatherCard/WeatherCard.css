@@ -1,15 +1,36 @@
 .weather-card {
   margin: 12px 0;
+  border-radius: 12px !important;
+  overflow: hidden;
 }
 
-.weatherCard-title {
-  font-size: 24px !important;
+.weather-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.weatherCard-temp {
-  font-size: 46px !important;
+.weather-card__icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
 }
 
-.weatherCard-body {
-  font-size: 16px !important;
+.weather-card__temperature {
+  margin-top: 8px !important;
+  font-weight: 500 !important;
+}
+
+.weather-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.weather-card__loading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 100px;
 }
