@@ -1,0 +1,36 @@
+{
+  "name": "weather-chrome-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Chrome extension for tracking weather in multiple cities",
+  "scripts": {
+    "start": "webpack --watch --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.3.0",
+    "@mui/material": "^7.3.0",
+    "@fontsource/roboto": "^5.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^13.0.0",
+    "css-loader": "^7.1.0",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.9.0",
+    "webpack": "^5.100.0",
+    "webpack-cli": "^6.0.0",
+    "webpack-merge": "^6.0.0"
+  }
+}
