@@ -1,33 +1,90 @@
-# React Chrome Extension Boilerplate
+# Weather Chrome Extension
+
+A Chrome extension built with React and TypeScript that allows users to track weather conditions in multiple cities.
+
+## Features
+
+- View current weather conditions for multiple cities
+- Add and remove cities
+- Display temperature, humidity, wind speed, and weather descriptions
+- Switch between Celsius and Fahrenheit
+- Save cities and preferences using Chrome Storage
+- Set a home city
+- Configure automatic weather overlay
+- Display the home city's temperature on the extension badge
+- Add cities through the browser context menu
+
+## Technologies
+
+- React 19
+- TypeScript
+- Material UI (MUI)
+- Webpack 5
+- Chrome Extensions Manifest V3
+- Chrome Storage API
+- Chrome Messaging API
+- Chrome Alarms API
+- OpenWeather API
 
 ## Getting Started
 
-1. `npm i` to install dependancies
-2. `npm start` to start running the fast development mode Webpack build process that bundle files into the `dist` folder
-3. `npm i --save-dev <package_name>` to install new packages
+### 1. Clone the repository
 
-## Loading The Chrome Extension
+```bash
+git clone https://github.com/yanakarpovych/weather-chrome-extension.git
+```
 
-1. Open Chrome and navigate to `chrome://extensions/`
-2. Toggle on `Developer mode` in the top right corner
-3. Click `Load unpacked`
-4. Select the entire `dist` folder
+### 2. Install dependencies
 
-# Important Initial Steps
+```bash
+npm install
+```
 
-1. `git init` to start a new git repo for tracking your changes, do an initial base commit with all the default files
-2. Update `package.json`, important fields include `author`, `version`, `name` and `description`
-3. Update `manifest.json`, important fields include `version`, `name` and `description`
-4. Update `webpack.commmon.js`, the title in the `getHtmlPlugins` function should be your extension name
+### 3. Configure the API key
 
-# Production Build
+Create an API key at [OpenWeather](https://openweathermap.org/api).
 
-1. `npm run build` to generate a minimized production build in the `dist` folder
-2. ZIP the entire `dist` folder (e.g. `dist.zip`)
-3. Publish the ZIP file on the Chrome Web Store Developer Dashboard!
+Copy `src/utils/apiKey.example.ts` to `src/utils/apiKey.ts` and replace the placeholder with your API key.
 
-## Important Default Boilerplate Notes
+The actual API key file is excluded from Git.
 
-- Folders get flattened, static references to images from HTML do not need to be relative (i.e. `icon.png` instead of `../static/icon.png`)
-- Importing local ts/tsx/css files should be relative, since Webpack will build a dependancy graph using these paths
-- Update the manifest file as per usual for chrome related permissions, references to files in here should also be flattened and not be relative
+**Security note:** The API key is embedded in the compiled extension. Do not treat it as secret when distributing the build.
+
+### 4. Build the extension
+
+```bash
+npm run typecheck
+npm run build
+```
+
+### 5. Load into Chrome
+
+1. Open `chrome://extensions/`.
+2. Enable Developer mode.
+3. Click **Load unpacked**.
+4. Select the generated `dist` directory.
+
+## Usage
+
+Open the extension Popup to add cities and view current weather conditions.
+
+Use the temperature button to switch between Celsius and Fahrenheit.
+
+Open Extension options to configure your home city and automatic weather overlay.
+
+On supported webpages, use the overlay button to toggle the weather card.
+
+## Development
+
+```bash
+npm run start
+```
+
+Webpack watches source files and rebuilds the extension after changes. Reload the extension in Chrome to apply updates.
+
+## Notes
+
+- The extension requires an internet connection and a valid OpenWeather API key.
+- Content scripts cannot run on Chrome internal pages.
+- Weather data availability depends on the OpenWeather API.
+- The overlay feature should be tested on regular HTTP or HTTPS websites.
